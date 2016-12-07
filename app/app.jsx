@@ -2,6 +2,7 @@
 
 let React = require('react'),
     ReactDOM = require('react-dom'),
+    TodoApp = require('TodoApp'),
     {Route, Router, IndexRoute, hashHistory} = require('react-router');
 
 //style!css! are chained loaders, look in webpack.config.js
@@ -11,6 +12,6 @@ $(document).foundation();
 require('style!css!sass!applicationStyles');
 
 ReactDOM.render(
-  <p>Boilerplate 3 Project</p>,
+  <TodoApp />,
   document.getElementById('app')
 );

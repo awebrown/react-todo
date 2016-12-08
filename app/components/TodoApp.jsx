@@ -1,8 +1,11 @@
 let React = require('react'),
     TodoList = require('TodoList'),
     AddTodo = require('AddTodo'),
+    TodoSearch = require('TodoSearch'),
     TodoApp = React.createClass({
       getInitialState: function() {
+        showCompleted: false
+        searchText: ''
         return {
           todos: [
             {
@@ -24,6 +27,12 @@ let React = require('react'),
       handleAddTodo: function(text) {
         alert('New todo: ' + text)
       },
+      handleSearch: function(showCompleted, searchText) {
+        this.setState({
+          showCompleted: showCompleted,
+          searchText: searchText.toLowerCase()
+        });
+      },
       render: function() {
         let {todos} = this.state;
 
@@ -31,8 +40,9 @@ let React = require('react'),
           <div>
             <div className="row">
               <div className="column small-centered medium-6">
+                <TodoSearch onSearch={this.handleSearch} />
                 <TodoList todos={todos}/>
-                <AddTodo onAddTodo={this.handleAddTodo}/>
+                <AddTodo onAddTodo={this.handleAddTodo} />
               </div>
             </div>
           </div>

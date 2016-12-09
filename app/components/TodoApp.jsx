@@ -1,6 +1,7 @@
 let React = require('react'),
     TodoList = require('TodoList'),
     AddTodo = require('AddTodo'),
+    uuid = require('node-uuid'),
     TodoSearch = require('TodoSearch'),
     TodoApp = React.createClass({
       getInitialState: function() {
@@ -9,23 +10,31 @@ let React = require('react'),
         return {
           todos: [
             {
-              id: 1,
+              id: uuid(),
               text: 'walk the dog'
             }, {
-              id: 2,
+              id: uuid(),
               text: 'clean the house'
             }, {
-              id: 3,
+              id: uuid(),
               text: 'do dishes'
             }, {
-              id: 4,
+              id: uuid(),
               text: 'play guitat'
             }
           ]
         }
       },
       handleAddTodo: function(text) {
-        alert('New todo: ' + text)
+        this.setState({
+          todos: [
+            ...this.state.todos,
+            {
+              id: uuid(),
+              text: text
+            }
+          ]
+        })
       },
       handleSearch: function(showCompleted, searchText) {
         this.setState({
@@ -41,7 +50,7 @@ let React = require('react'),
             <div className="row">
               <div className="column small-centered medium-6">
                 <TodoSearch onSearch={this.handleSearch} />
-                <TodoList todos={todos}/>
+                <TodoList todos={todos} />
                 <AddTodo onAddTodo={this.handleAddTodo} />
               </div>
             </div>

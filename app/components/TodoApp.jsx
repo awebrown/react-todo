@@ -7,20 +7,25 @@ let React = require('react'),
       getInitialState: function() {
         showCompleted: false
         searchText: ''
+        completed: false
         return {
           todos: [
             {
               id: uuid(),
-              text: 'walk the dog'
+              text: 'walk the dog',
+              completed: false
             }, {
               id: uuid(),
-              text: 'clean the house'
+              text: 'clean the house',
+              completed: true
             }, {
               id: uuid(),
-              text: 'do dishes'
+              text: 'do dishes',
+              completed: true
             }, {
               id: uuid(),
-              text: 'play guitat'
+              text: 'play guitat',
+              completed: false
             }
           ]
         }
@@ -31,10 +36,20 @@ let React = require('react'),
             ...this.state.todos,
             {
               id: uuid(),
-              text: text
+              text: text,
+              completed: false
             }
           ]
         })
+      },
+      handleToggle: function(id) {
+        let updatedTodos = this.state.todos.map((todo) => {
+          if (todo.id === id) {
+            todo.completed = !todo.completed;
+          }
+          return todo;
+        })
+        this.setState({todos: updatedTodos})
       },
       handleSearch: function(showCompleted, searchText) {
         this.setState({
@@ -50,7 +65,7 @@ let React = require('react'),
             <div className="row">
               <div className="column small-centered medium-6">
                 <TodoSearch onSearch={this.handleSearch} />
-                <TodoList todos={todos} />
+                <TodoList todos={todos} onToggle={this.handleToggle} />
                 <AddTodo onAddTodo={this.handleAddTodo} />
               </div>
             </div>

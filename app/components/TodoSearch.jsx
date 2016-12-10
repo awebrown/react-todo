@@ -8,7 +8,7 @@ let React = require('react'),
       },
       render: function() {
         return (
-          <div>
+          <div className="container__header">
             <div>
               <input type="text"
                      ref="searchText"

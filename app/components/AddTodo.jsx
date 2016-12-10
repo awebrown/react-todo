@@ -14,7 +14,7 @@ let React = require('react'),
       },
       render: function() {
         return (
-          <div>
+          <div className="container__footer">
             <form ref="form" onSubmit={this.onSubmit} className="todo-form">
               <input type="text" ref="todoText" className="expanded" placeholder="What do you need to do?"/>
               <button className="button primary expanded">Add Todo</button>

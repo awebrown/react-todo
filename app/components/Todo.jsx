@@ -7,7 +7,7 @@ let React = require('react'),
           <div onClick={() => {
               this.props.onToggle(id);
             }}>
-            <input type="checkbox" checked={completed}/>
+            <input type="checkbox" checked={completed} />
             {text}
           </div>
         )

@@ -4,7 +4,6 @@ let React = require('react'),
         let showCompleted = this.refs.showCompleted.checked;
         let searchText = this.refs.searchText.value;
 
-          console.log(searchText)
         this.props.onSearch(showCompleted, searchText);
       },
       render: function() {

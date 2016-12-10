@@ -1,5 +1,6 @@
 let React = require('react'),
     uuid = require('node-uuid'),
+    moment = require('moment'),
 
     TodoList = require('TodoList'),
     AddTodo = require('AddTodo'),
@@ -24,7 +25,9 @@ let React = require('react'),
             {
               id: uuid(),
               text: text,
-              completed: false
+              completed: false,
+              createdAt: moment().unix(),
+              completedAt: undefined
             }
           ]
         })
@@ -33,6 +36,7 @@ let React = require('react'),
         let updatedTodos = this.state.todos.map((todo) => {
           if (todo.id === id) {
             todo.completed = !todo.completed;
+            todo.completedAt = todo.completed ? moment().unix() : undefined;
           }
           return todo;
         })

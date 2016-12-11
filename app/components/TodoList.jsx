@@ -6,7 +6,7 @@ let React = require('react'),
         let renderTodos = () => {
           if(todos.length === 0) {
             return (
-              <p className="container__message">Nothing To Do</p>
+              <p className="container__message">Nothing To See Here</p>
             );
           }
           return todos.map((todo) => {

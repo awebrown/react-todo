@@ -25,19 +25,10 @@ module.exports = {
      return !todo.completed || showCompleted;
    })
 
-   let something = filteredTodos.indexOf('Walk the dog')
-
-
   //Filter by searchText
    filteredTodos = filteredTodos.filter((todo) => {
      let text = todo.text.toLowerCase();
      return searchText.length === 0 || text.indexOf(searchText) > -1;
-
-     if(text.indexOf(searchText) === 1) {
-       return console.log('MATCH');
-     } else {
-      return !todo.completed || showCompleted;
-     }
    })
 
    //Sort todos with non-completed first

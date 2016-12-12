@@ -1,8 +1,7 @@
-'use strict';
-
 let React = require('react'),
     ReactDOM = require('react-dom'),
     TodoApp = require('TodoApp'),
+    {Provider} = require('react-redux'),
     {Route, Router, IndexRoute, hashHistory} = require('react-router');
 
 
@@ -25,6 +24,8 @@ $(document).foundation();
 require('style!css!sass!applicationStyles');
 
 ReactDOM.render(
-  <TodoApp />,
+  <Provider store={store}>
+    <TodoApp />
+  </Provider>,
   document.getElementById('app')
 );

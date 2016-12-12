@@ -1,32 +1,45 @@
 let React = require('react'),
-    TodoSearch = React.createClass({
-      handleSearch: function() {
-        let showCompleted = this.refs.showCompleted.checked;
-        let searchText = this.refs.searchText.value;
+    {connect} = require('react-redux'),
+    actions = require('actions');
 
-        this.props.onSearch(showCompleted, searchText);
-      },
-      render: function() {
-        return (
-          <div className="container__header">
-            <div>
-              <input type="text"
-                     ref="searchText"
-                     placeholder="Search todos"
-                     onChange={this.handleSearch} />
-            </div>
-            <div>
-              <label>
-                  <input type="checkbox"
-                         ref="showCompleted"
-                         onChange={this.handleSearch} />
-                         Show completed todos
-              </label>
+export let TodoSearch = React.createClass({
+  render: function() {
+    let {dispatch, showCompleted, searchText} = this.props;
 
-            </div>
-          </div>
-        )
-      }
-    });
+    return (
+      <div className="container__header">
+        <div>
+          <input type="search"
+                 ref="searchText"
+                 placeholder="Search todos"
+                 value={searchText}
+                 onChange={() => {
+                   let searchText = this.refs.searchText.value;
+                   dispatch(actions.setSearchText(searchText));
+                 }} />
+        </div>
+        <div>
+          <label>
+              <input type="checkbox"
+                     ref="showCompleted"
+                     checked={showCompleted}
+                     onChange={() => {
+                       dispatch(actions.toggleShowCompleted());
+                     }} />
+                     Show completed todos
+          </label>
 
-module.exports = TodoSearch;
+        </div>
+      </div>
+    )
+  }
+});
+
+export default connect(
+  (state) => {
+    return {
+      showCompleted: state.showCompleted,
+      searchText: state.searchText
+    };
+  }
+)(TodoSearch);

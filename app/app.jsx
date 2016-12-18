@@ -9,14 +9,17 @@ let React = require('react'),
 import TodoApp from 'TodoApp';
 // import './../playground/firebase/Index';
 
-store.subscribe(() => {
-  let state = store.getState();
-  console.log('New State: ', store.getState());
-  TodoAPI.setTodos(state.todos);
-});
+// store.subscribe(() => {
+//   let state = store.getState();
+//   console.log('New State: ', store.getState());
+//   TodoAPI.setTodos(state.todos);
+// });
 
-let initialTodos = TodoAPI.getTodos();
-store.dispatch(actions.addTodos(initialTodos));
+// let initialTodos = TodoAPI.getTodos();
+// store.dispatch(actions.addTodos(initialTodos));
+
+store.dispatch(actions.startAddTodos());
+
 
 // store.dispatch(actions.addTodo('clean the yard'));
 // store.dispatch(actions.setSearchText('yard'));

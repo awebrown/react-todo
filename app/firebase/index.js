@@ -3,11 +3,10 @@ import firebase from 'firebase';
 try {
   // Initialize Firebase
   var config = {
-    apiKey: "AIzaSyCYCVTlkHK_zDjyFPoMk8DEzEfk5EXTPLk",
-    authDomain: "awebrown-todo-app-8a9a3.firebaseapp.com",
-    databaseURL: "https://awebrown-todo-app-8a9a3.firebaseio.com",
-    storageBucket: "awebrown-todo-app-8a9a3.appspot.com",
-    messagingSenderId: "369431450857"
+    apiKey: process.env.API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    databaseURL: process.env.DATABASE_URL,
+    storageBucket: process.env.STORAGE_BUCKET
   };
   firebase.initializeApp(config);
 } catch (e) {

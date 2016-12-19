@@ -7,6 +7,7 @@ let React = require('react'),
     TodoAPI = require('TodoAPI');
 
 import TodoApp from 'TodoApp';
+import Login from 'Login';
 // import './../playground/firebase/Index';
 
 // store.subscribe(() => {
@@ -32,7 +33,12 @@ require('style!css!sass!applicationStyles');
 
 ReactDOM.render(
   <Provider store={store}>
-    <TodoApp />
+    <Router history={hashHistory}>
+      <Route path="/">
+        <Route path="/todoapp" component={TodoApp} />
+        <IndexRoute component={Login} />
+      </Route>
+    </Router>
   </Provider>,
   document.getElementById('app')
 );

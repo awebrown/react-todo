@@ -1,13 +1,20 @@
 let React = require('react'),
     ReactDOM = require('react-dom'),
     {Provider} = require('react-redux'),
-    {Route, Router, IndexRoute, hashHistory} = require('react-router'),
+    {hashHistory} = require('react-router'),
     actions = require('actions'),
-    store = require('configureStore').configure(),
-    TodoAPI = require('TodoAPI');
+    store = require('configureStore').configure();
 
-import TodoApp from 'TodoApp';
-import Login from 'Login';
+import firebase from 'app/firebase/';
+import router from 'app/router/';
+
+firebase.auth().onAuthStateChanged((user) => {
+  if(user) {
+    hashHistory.push('/todoapp');
+  } else {
+    hashHistory.push('/');
+  }
+});
 // import './../playground/firebase/Index';
 
 // store.subscribe(() => {
@@ -18,27 +25,18 @@ import Login from 'Login';
 
 // let initialTodos = TodoAPI.getTodos();
 // store.dispatch(actions.addTodos(initialTodos));
-
 store.dispatch(actions.startAddTodos());
-
 // store.dispatch(actions.addTodo('clean the yard'));
 // store.dispatch(actions.setSearchText('yard'));
 // store.dispatch(actions.toggleShowCompleted());
-
 //style!css! are chained loaders, look in webpack.config.js
 //load Foundation
 $(document).foundation();
 //App css
 require('style!css!sass!applicationStyles');
-
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={hashHistory}>
-      <Route path="/">
-        <Route path="/todoapp" component={TodoApp} />
-        <IndexRoute component={Login} />
-      </Route>
-    </Router>
+    {router}
   </Provider>,
   document.getElementById('app')
 );

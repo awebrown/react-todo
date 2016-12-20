@@ -5,8 +5,8 @@ let React = require('react'),
 
 import TodoList from 'TodoList';
 
-export let Todo = React.createClass({
-  render: function() {
+export class Todo extends React.Component {
+  render () {
     let {id, text, completed, createdAt, completedAt, dispatch} = this.props;
     let todoClassName = completed ? 'todo todo-completed' : 'todo';
     let renderDate = () => {
@@ -17,7 +17,6 @@ export let Todo = React.createClass({
         message = 'Completed ';
         timestamp = completedAt;
       }
-
       return message + moment.unix(timestamp).format('MMM Do YYYY @ h:mm a');
     };
     return (
@@ -32,8 +31,8 @@ export let Todo = React.createClass({
           <p className="todo-subtext">{renderDate()}</p>
         </div>
       </div>
-    )
+    );
   }
-});
+};
 
 export default connect()(Todo);

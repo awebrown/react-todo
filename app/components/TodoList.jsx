@@ -4,16 +4,15 @@ let React = require('react'),
 
 import Todo from 'Todo';
 
-export let TodoList = React.createClass({
-  render: function() {
+export class TodoList extends React.Component {
+  render () {
     let {todos, showCompleted, searchText} = this.props;
     let renderTodos = () => {
       let filteredTodos = TodoAPI.filterTodos(todos, showCompleted, searchText);
 
        if(filteredTodos.length === 0) {
-           return <p className="container__message">Nothing To See Here</p>
+         return <p className="container__message">Nothing To See Here</p>
        }
-
 
       return filteredTodos.map((todo) => {
         return (
@@ -25,7 +24,7 @@ export let TodoList = React.createClass({
       <div>{renderTodos()}</div>
     )
   }
-});
+};
 
 export default connect(
   (state) => {

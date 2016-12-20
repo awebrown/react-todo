@@ -5,6 +5,8 @@ export let searchTextReducer = (state = '', action) => {
   switch (action.type) {
     case 'SET_SEARCH_TEXT':
       return action.searchText;
+    case 'LOGOUT':
+      return '';
     default:
       return state;
   };
@@ -14,6 +16,8 @@ export let showCompletedReducer = (state = false, action) => {
   switch (action.type) {
     case 'TOGGLE_SHOW_COMPLETED':
       return !state;
+    case 'LOGOUT':
+      return false;
     default:
       return state;
   };
@@ -37,12 +41,12 @@ export let todosReducer = (state = [], action) => {
           return todo;
         }
       });
-      case 'ADD_TODOS' :
+      case 'ADD_TODOS':
         return [
           ...state,
           ...action.todos
         ];
-      case 'LOGOUT' :
+      case 'LOGOUT':
         return [];
     default:
       return state;

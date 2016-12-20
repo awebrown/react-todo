@@ -109,7 +109,6 @@ describe('Reducers', () => {
       const res = reducers.authReducer(df(authData), df(action));
 
       expect(res).toEqual({});
-    })
+    });
   });
-
 });

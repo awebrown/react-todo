@@ -3,10 +3,15 @@ import * as Redux from 'react-redux';
 import * as actions from 'actions';
 
 export let Login = React.createClass({
-  onLogin() {
+  onLoginFacebook() {
     let {dispatch} = this.props;
 
-    dispatch(actions.startLogin());
+    dispatch(actions.startLoginFacebook());
+  },
+  onLoginGithub() {
+    let {dispatch} = this.props;
+
+    dispatch(actions.startLoginGithub());
   },
     render: function() {
       return (
@@ -16,8 +21,9 @@ export let Login = React.createClass({
             <div className="columns small-centered small-10 medium-6 large-4">
               <div className="callout callout-auth">
                 <h3>Login</h3>
-                <p>Login with github account below</p>
-                <button className="button" onClick={this.onLogin}>Login with github</button>
+                <p>Login with facebook account below</p>
+                <button className="button" onClick={this.onLoginGithub}>Login with GitHub</button>
+                <button className="button" onClick={this.onLoginFacebook}>Login with Facebook</button>
               </div>
             </div>
           </div>

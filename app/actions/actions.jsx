@@ -1,4 +1,4 @@
-import firebase, {firebaseRef, githubProvider} from 'app/firebase/';
+import firebase, {firebaseRef, facebookProvider, githubProvider} from 'app/firebase/';
 import moment from 'moment';
 
 export let setSearchText = (searchText) => {
@@ -24,7 +24,8 @@ export let addTodos = (todos) => {
 
 export let startAddTodos = () => {
   return (dispatch, getState) => {
-    let todosRef = firebaseRef.child('todos');
+    let uid = getState().auth.uid;
+    let todosRef = firebaseRef.child(`users/${uid}/todos`);
 
     return todosRef.once('value').then((snapshot) => {
       let todos = snapshot.val() || {};
@@ -50,7 +51,8 @@ export let startAddTodo = (text) => {
       createdAt: moment().unix(),
       completedAt: null
     };
-    let todoRef = firebaseRef.child('todos').push(todo);
+    let uid = getState().auth.uid;
+    let todoRef = firebaseRef.child(`users/${uid}/todos`).push(todo);
 
     return todoRef.then(() => {
       dispatch(addTodo({
@@ -77,7 +79,8 @@ export let updateTodo = (id, updates) => {
 
 export let startToggleTodo = (id, completed) => {
   return (dispatch, getState) => {
-    let todoRef = firebaseRef.child(`todos/${id}`);
+    let uid = getState().auth.uid;
+    let todoRef = firebaseRef.child(`users/${uid}/todos/${id}`);
     let updates = {
       completed,
       completedAt: completed ? moment().unix() : null
@@ -95,7 +98,16 @@ export let login = (uid) => {
   };
 };
 
-export let startLogin = () => {
+export let startLoginFacebook = () => {
+  return (dispatch, getState) =>{
+    return firebase.auth().signInWithPopup(facebookProvider).then((res) => {
+    }, (e) => {
+      console.log('Unable to auth', e);
+    });
+  };
+};
+
+export let startLoginGithub = () => {
   return (dispatch, getState) =>{
     return firebase.auth().signInWithPopup(githubProvider).then((res) => {
     }, (e) => {
